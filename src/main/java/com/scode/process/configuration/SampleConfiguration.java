@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 
+import java.util.Map;
+
 @Configuration
 public class SampleConfiguration {
 
@@ -14,7 +16,8 @@ public class SampleConfiguration {
 
     @EventListener
     private void processPostDeploy(PostDeployEvent event) {
-        runtimeService.startProcessInstanceByKey("sample_process_key");
+        runtimeService.startProcessInstanceByKey("sample_process_key", "BUSINESS_KEY",
+                Map.of("v", 1));
     }
 
 }
